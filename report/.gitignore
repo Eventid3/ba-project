@@ -1,0 +1,32 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+
+# Biber/BibLaTeX
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+# Build directory
+build/
+
+# Editor files
+*.swp
+*~
+.DS_Store
+
+*-SAVE-ERROR
