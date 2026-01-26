@@ -1,34 +1,112 @@
 \chapter{Krav}
 \label{chap:krav}
 
-Dette kapitel beskriver de krav som systemet/løsningen skal opfylde.
+Dette kapitel beskriver de funktionelle krav og ikke-funktionelle krav som systemet skal opfylde. Kravene er beskrevet med user-stories, og alle krav er prioriteret med MoSCoW.
 
 \section{Funktionelle krav}
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}lp{10cm}@{}}
-\toprule
-\textbf{ID} & \textbf{Krav} \\ \midrule
-FR1 & Beskrivelse af funktionelt krav 1 \\
-FR2 & Beskrivelse af funktionelt krav 2 \\
-FR3 & Beskrivelse af funktionelt krav 3 \\
-\bottomrule
-\end{tabular}
-\caption{Funktionelle krav}
-\label{tab:funktionelle_krav}
-\end{table}
+
+De funktionelle krav er beskrevet vha X antal epics, med dertilhørende user stories. Under hver user-story er kriterierne for accept beskrevet.
+
+\subsection{Epic 1 - Semantisk søgning}
+
+\textbf{Beskrivelse}: Implementer AI-drevet søgning der forstår betydningen af søgeforespørgsler og matcher med relevant indhold baseret på semantisk lighed frem for kun nøgleord.
+\\
+\\
+\textbf{Bruger værdi}: Brugere kan finde relevant information selv når de ikke bruger præcise nøgleord, 
+hvilket reducerer søgetid og forbedrer brugeroplevelsen.
+
+\subsubsection{User Story 1.1}
+
+Som \textbf{gæstebruger} vil jeg gerne søge efter information,
+så jeg kan finde relevant indhold uden at logge ind
+\\
+\\
+\textbf{Acceptance Criteria:}
+
+\begin{itemize}
+    \item Søgefunktion er tilgængelig uden login
+    \item Resultater vises for alle brugergrupper (ikke personaliseret)
+    \item Mindst 5 relevante resultater for almindelige søgninger
+\end{itemize}
+
+\subsubsection{User Story 1.2}
+
+Som \textbf{content editor} vil jeg have at nyt indhold automatisk bliver søgbart,
+så jeg ikke skal tænke på manuel re-indexering
+\\
+\\
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item Når indhold publiceres, genereres embedding inden for 30 sekunder
+    \item Når indhold opdateres, re-genereres embedding automatisk
+    \item Fejl i indexering vises i backoffice
+\end{itemize}
+
+
+\subsection{Epic 2 - Personaliseret søgning}
+
+\textbf{Beskrivelse}: Søgeresultater tilpasses automatisk baseret på brugerens rolle/gruppe,
+så mest relevante indhold for deres arbejdsområde vises først.
+\\
+\\
+\textbf{Bruger værdi}: Brugere slipper for at sortere gennem irrelevant indhold og finder hurtigere
+de guider der matcher deres behov.
+
+\subsubsection{User Story 2.2}
+Som \textbf{bruger der er logget ind}, vil jeg gerne se søgeresultater der tilpasset min rolle, så jeg slipper for at gennemsøge irrelevant content.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item Systemet identificerer min brugergruppe automatisk
+    \item Højt relevante resultater for min gruppe vises først
+    \item Irrelevante resultater vises lavere eller skjules helt
+    \item Visuelt indikator viser hvorfor resultat er relevant for mig
+\end{itemize}
+
+\subsection{Epic 3 - Semantisk svar}
+
+\textbf{Beskrivelse:} Implementer semantisk svar på en søgning, så søgeresultatet også indeholder et sammenfattende svar på søge querien.
+\\
+\\
+\textbf{Bruger værdi:} Brugeren får et potentielt hurtigere svar, og slipper for at dykke ned i for meget content.
+
+\subsubsection{User Story 3.3}
+Som \textbf{bruger} vil jeg gerne have et sammenfattende svar på min søgning, så jeg sparer tid på at gennemgå for meget indhold.
+\\
+\\
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+\item Et sammenfattende svar vises øverst i søgeresultaterne
+\item Svaret er maksimalt 2-3 sætninger langt
+\item Svaret inkluderer reference til de kilder der blev brugt
+\item Hvis der ikke kan genereres et sikkert svar, vises kun almindelige søgeresultater
+\end{itemize}
+
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{@{}lp{10cm}@{}}
+% \toprule
+% \textbf{ID} & \textbf{Krav} \\ \midrule
+% R1 & Beskrivelse af funktionelt krav 1 \\
+% FR2 & Beskrivelse af funktionelt krav 2 \\
+% FR3 & Beskrivelse af funktionelt krav 3 \\
+% \bottomrule
+% \end{tabular}
+% \caption{Funktionelle krav}
+% \label{tab:funktionelle_krav}
+% \end{table}
 
 \section{Ikke-funktionelle krav}
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}lp{10cm}@{}}
-\toprule
-\textbf{ID} & \textbf{Krav} \\ \midrule
-NFR1 & Beskrivelse af ikke-funktionelt krav 1 \\
-NFR2 & Beskrivelse af ikke-funktionelt krav 2 \\
-NFR3 & Beskrivelse af ikke-funktionelt krav 3 \\
-\bottomrule
-\end{tabular}
-\caption{Ikke-funktionelle krav}
-\label{tab:ikke_funktionelle_krav}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{@{}lp{10cm}@{}}
+% \toprule
+% \textbf{ID} & \textbf{Krav} \\ \midrule
+% NFR1 & Beskrivelse af ikke-funktionelt krav 1 \\
+% NFR2 & Beskrivelse af ikke-funktionelt krav 2 \\
+% NFR3 & Beskrivelse af ikke-funktionelt krav 3 \\
+% \bottomrule
+% \end{tabular}
+% \caption{Ikke-funktionelle krav}
+% \label{tab:ikke_funktionelle_krav}
+% \end{table}
