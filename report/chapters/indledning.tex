@@ -1,23 +1,45 @@
 \chapter{Indledning}
 \label{chap:indledning}
 
-Skriv din indledning her.
+Søgning er en central feature i mange webapplikationer og systemer. 
+Både til at finde relevante informationer, men også som genvej til at navigerer i apps, komplekse informationer og store datasæt. 
+Eftiv søgning bør derfor ikke kun ses som en feature der bruges ved nød, men som et centralt element i brugeroplevelsen.
 
-\section{Baggrund}
-Beskrivelse af baggrunden for projektet.
+Med AI bliver søgning mere og mere avanceret, og brugere forventer i stigende grad at svaret, eller det de søger efter, bliver præsenteret direkte og hurtigt, frem for en liste af links eller resultater der manuelt skal gemmengås. 
+Dette projekt undersøger hvordan AI-drevne søgefunktioner kan forbedre brugeroplevelsen i webapplikationer, med fokus på relevans og brugervenlighed.
 
-\section{Motivation}
-Hvorfor er dette projekt relevant?
+\section{Baggrund \& motivation}
+Landbrug og Fødevarers L\&F Sektor for Gris, har hos Heyday fået udarbejdet et nyt website, der fungerer som vidensbank for landmænd, dyrlæger, transportører og andre aktører i svinesektoren.
+Mange års vidensindsamling, produktudvikling og forskning er samlet i denne vidensbank, som indeholder en stor mængde information i form af artikler, vejledninger og rapporter.
+
+En bruger af systemet har behov for en effektiv søgefunktion, der kan hjælpe med hurtigt at finde relevant information. Og med hjælp fra AI, kan denne søgefunktion gøres endnu mere brugervenlig og præcis.
+I stedet for kun at matche på eksakte nøgleord, kan en moderne søgemaskine forstå den semantiske betydning af en forespørgsel. 
+Dette opnås ved at omdanne alt indhold til numeriske repræsentationer, såkaldte embeddings, der kan sammenlignes i en vektordatabase. 
+En sådan tilgang, ofte kaldet semantisk søgning, muliggør mere relevante resultater, selv når brugeren ikke kender den præcise fagterminologi.
+Ved at kombinere dette med en sprogmodel, der kan generere et resumé baseret på de fundne resultater (en teknik kendt som Retrieval-Augmented Generation eller RAG), kan brugeroplevelsen forbedres markant.
+
+Det er samtidig relevant at afsøge, hvordan AI integreres i eksisterende systemer, og hvilke arkitektur og designmæssige udfordringer og muligheder dette medfører. 
+Derudover er det samtidig interessant, at se på, hvordan vi som mennesker bruger AI til at finde information, og hvordan dette påvirker vores forventninger til søgefunktioner.
 
 \section{Problemformulering}
-Beskriv problemstillingen som rapporten søger at besvare.
 
-\subsection{Forskningsspørgsmål}
-\begin{itemize}
-    \item Forskningsspørgsmål 1
-    \item Forskningsspørgsmål 2
-    \item Forskningsspørgsmål 3
-\end{itemize}
+Med afsæt i overstående, søger dette projekt at besvare følgende problemformulering:
 
-\section{Rapportens opbygning}
-Kort beskrivelse af hvordan rapporten er struktureret.
+\textbf{"Hvordan kan anvendelsen af text-embeddings til at skabe semantisk forståelse, 
+    forbedre kvaliteten og relevansen af søgeresultater i en specialiseret vidensbank, 
+    som Gris.dk, sammenlignet med en traditionel nøgleordsbaseret tilgang?"}
+
+    \begin{figure}[H]
+    \begin{center}
+        \includegraphics[scale=0.5]{../img/indledning-tegning-1.png}
+    \end{center}
+    \caption{
+    Overblik over systemets funktionalitet med eksempel: 
+    1. En landmand søger på noget bestemt på gris.dk, i sit eget sprog.
+    2. Gris.dk sender forespørgslen videre til AI microservicen.
+    3. Microservicen omdanner forespørgslen til en embedding, og søger i vektordatabasen efter de nærmeste dokument-embeddings.
+    4. En LLM generere et opsummerende svar baseret på de fundne dokumenter.
+    5. Svaret vises på gris.dk, sammen med søgeresultaterne.
+    }\label{fig:problemformulering}
+\end{figure}
+
