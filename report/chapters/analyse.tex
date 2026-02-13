@@ -1,25 +1,14 @@
 \chapter{Analyse}
 \label{chap:analyse}
 
-Dette kapitel præsenterer analysen af problemområdet.
+I dette kapitel vil systemanalyse og teknologianalyse blive gennemgået. 
+Formålet med systemanalysen er, at belyse hvilke dele af systemet der er mest kritiske for udviklingen af projektet, og hvilken dele der kan ned prioriteres. 
+Dette vil ligge til grund for beslytningerne i afgrænsnings afsnittet.
 
-\section{Domæneanalyse}
-Beskriv domænet.
+Teknologianalysen vil komme mere specifikt ind på hvilke teknologier der er relevante i de forskellige dele af systemet, fx valg af programmeringssprog, frameworks, modeller til embedding og LLM modeller.
 
-\section{Eksisterende løsninger}
-Analyse af eksisterende løsninger og konkurrenter.
+\section{Systemanalyse}
 
-\section{Sammenligning}
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}lccc@{}}
-\toprule
-\textbf{Løsning} & \textbf{Feature 1} & \textbf{Feature 2} & \textbf{Feature 3} \\ \midrule
-Løsning A & Ja & Nej & Ja \\
-Løsning B & Ja & Ja & Nej \\
-Din løsning & Ja & Ja & Ja \\
-\bottomrule
-\end{tabular}
-\caption{Sammenligning af løsninger}
-\label{tab:sammenligning}
-\end{table}
+Arkitekturen i systemet er basering på en microservice arkitektur, hvor flere services har hver deres ansvar. AI søgnings projektet vil indgå i denne arkitektur som en selvstændig service.
+
+
