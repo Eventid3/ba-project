@@ -11,16 +11,50 @@ Teknologianalysen vil komme mere specifikt ind på hvilke teknologier der er rel
 
 Arkitekturen i systemet er basering på en microservice arkitektur, hvor flere services har hver deres ansvar. 
 AI søgnings projektet vil indgå i denne arkitektur som en selvstændig service.
-Herunder ses en liste over de allerede eksisterende dele af systemet, der vil blive påvirket af udviklingen af AI søgnings projektet:
+De følgende afsnit beskriver de forskellige dele af systemet, der vil blive påvirket af udviklingen af AI søgnings projektet.
+
+\subsection{AI Microservice}
+
+Denne service er central for projektet. Her vil embeddings blive genereret og gemt i databasen, og der vil ligeledes blive genereret et opsummerende svar på baggrund af contexten i en forespørgsel.
+\\
+\\
+Embeddings vil blive genereret i flere forskellige situationer:
+\begin{enumerate}
+    \item{Når nyt indhold oprettes i Umbraco, eller eksisterende indhold opdateres.}
+    \item{Når en bruger foretager en søgning, og der skal genereres en embedding for forespørgslen. Det er denne embedding der skal sammenlignes med de dokument-embeddings der er gemt i databasen, for at finde de mest relevante resultater.}
+\end{enumerate}
+
+Herefter er det også denne service der har ansvaret for, at konstruere det opsummerende svar, baseret på de fundne dokumenter, og returnere dette til Umbraco backend.
+
+Hermed må det konkluderes, at AI servicen er det mest kritiske element for projektet, og at det ikke er en mulighed at nedprioritere denne del.
+
+\subsection{Umbraco Backend}
+
+Backenden spiller en central rolle for i den endelige integration af AI søgningen, og har en række ansvarsområder:
 
 \begin{itemize}
-    \item \textbf{AI Microservice:} Denne service er central for projektet. Her vil embeddings blive genereret og gemt i databasen, og der vil ligeledes blive genereret et opsummerende svar på baggrund af contexten i en forespørgsel.
-    \item \textbf{Umbraco Backend:} Backenden spiller en central rolle for i den endelige integration af AI søgningen, og har en række ansvarsområder:
-        \begin{itemize}
-            \item{At sende nyt og opdateret indhold fra Umbraco til AI microservicen, så der kan genereres embeddings.}
-            \item{At videreformidle forespørgsler fra frontend til AI microservicen, og returnere søgeresultater samt det opsummerende svar.}
-        \end{itemize}
-    \item \textbf{Frontend:} Frontenden har det naturlige ansvar for at præsentere AI søgningen for brugeren, og skal derfor kunne håndtere brugerinput og vise søgeresultater samt det opsummerende svar på en brugervenlig måde.
+    \item{At sende nyt og opdateret indhold fra Umbraco til AI microservicen, så der kan genereres embeddings.}
+    \item{At videreformidle forespørgsler fra frontend til AI microservicen, og returnere søgeresultater samt det opsummerende svar.}
 \end{itemize}
+
+Før at dokumenter kan sendes til microservice, skal det først omdannes til et format der kan håndteres af microservicen, og det er backenden der har ansvaret for dette. Data kan både være placeret i Umbraco's database, som flere forskellige objekttyper, eller det kan være PDF'er. Opgaven i at konvertere disse data er altså ikke helt triviel, og det er vigtigt at få dette til at fungere, for at AI søgningen kan fungere optimalt.
+
+Backendens opgave kan ikke udføres uden AI Microservice, men det er stadig en høj prioritet at få denne del til at fungere, af hensyn til det endelige produkt, og derfor må backenden have en høj prioritet i udviklingen.
+
+\subsection{Frontend}
+
+Frontenden har det naturlige ansvar for at præsentere AI søgningen for brugeren, og skal derfor kunne håndtere brugerinput og vise søgeresultater samt det opsummerende svar på en brugervenlig måde.
+
+Frontenden kan ikke ses som kritisk for udviklingen af AI søgningen, men er selvfølgelig vigtig for brugeroplevelsen. Men af hensyn til udviklingstiden kan det potentielt være denne del der nedprioriteres.
+
+\section{Teknologianalyse}
+
+\subsection{Programmeringssprog}
+
+\subsection{Frameworks}
+
+\subsection{Modeller til embedding}
+
+\subsection{LLM}
 
 
