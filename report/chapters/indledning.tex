@@ -3,10 +3,24 @@
 
 Søgning er en central feature i mange webapplikationer og systemer. 
 Både til at finde relevante informationer, men også som genvej til at navigerer i apps, komplekse informationer og store datasæt. 
-Efftiv søgning bør derfor ikke kun ses som en feature der bruges ved nød, men som et centralt element i brugeroplevelsen \cite{nielsen2001search}.
+Effektiv søgning bør derfor ikke kun ses som en feature der bruges ved nød, men som et centralt element i brugeroplevelsen \cite{nielsen2001search}.
 
-Med AI bliver søgning mere og mere avanceret, og brugere forventer i stigende grad at svaret, eller det de søger efter, bliver præsenteret direkte og hurtigt, frem for en liste af links eller resultater der manuelt skal gemmengås (se bare på Google.com \cite{google2023sge}).
+Med AI bliver søgning mere og mere avanceret, og brugere forventer i stigende grad at svaret, eller det de søger efter, bliver præsenteret direkte og hurtigt af en LLM, frem for en liste af links eller resultater der manuelt skal gennemgås (se bare på Google.com \cite{google2023sge}).
 Dette projekt undersøger hvordan AI-drevne søgefunktioner kan forbedre brugeroplevelsen i webapplikationer, med fokus på relevans og brugervenlighed.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[scale=0.42]{../img/indledning-tegning-1.png}
+    \end{center}
+    \caption{
+        Overblik over systemets funktionalitet med eksempel: 
+        1. En bruger søger på noget bestemt på gris.dk, i sit eget sprog.
+        2. Gris.dk sender forespørgslen videre til AI microservicen.
+        3. Microservicen omdanner forespørgslen til en embedding, og søger i vektordatabasen efter de nærmeste dokument-embeddings.
+        4. En LLM generere et opsummerende svar baseret på de fundne dokumenter.
+        5. Svaret vises på gris.dk, sammen med søgeresultaterne.
+    }\label{fig:problemformulering}
+\end{figure}
 
 \section{Baggrund \& motivation}
 Landbrug og Fødevarers L\&F Sektor for Gris\cite{grisdk}, har hos Heyday\cite{heyday} fået udarbejdet et nyt website, der fungerer som vidensbank for landmænd, dyrlæger, transportører og andre aktører i svinesektoren.
@@ -24,22 +38,10 @@ Derudover er det samtidig interessant, at se på, hvordan vi som mennesker bruge
 \section{Problemformulering}
 
 Med afsæt i overstående, søger dette projekt at besvare følgende problemformulering:
-
+\\
+\\
 \textbf{"Hvordan kan anvendelsen af text-embeddings til at skabe semantisk forståelse, 
     forbedre kvaliteten og relevansen af søgeresultater i en specialiseret vidensbank, 
     som Gris.dk, sammenlignet med en traditionel nøgleordsbaseret tilgang?"}
 
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[scale=0.5]{../img/indledning-tegning-1.png}
-    \end{center}
-    \caption{
-    Overblik over systemets funktionalitet med eksempel: 
-    1. En landmand søger på noget bestemt på gris.dk, i sit eget sprog.
-    2. Gris.dk sender forespørgslen videre til AI microservicen.
-    3. Microservicen omdanner forespørgslen til en embedding, og søger i vektordatabasen efter de nærmeste dokument-embeddings.
-    4. En LLM generere et opsummerende svar baseret på de fundne dokumenter.
-    5. Svaret vises på gris.dk, sammen med søgeresultaterne.
-    }\label{fig:problemformulering}
-\end{figure}
 

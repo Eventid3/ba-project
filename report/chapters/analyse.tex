@@ -3,12 +3,24 @@
 
 I dette kapitel vil systemanalyse og teknologianalyse blive gennemgået. 
 Formålet med systemanalysen er, at belyse hvilke dele af systemet der er mest kritiske for udviklingen af projektet, og hvilken dele der kan ned prioriteres. 
-Dette vil ligge til grund for beslytningerne i afgrænsnings afsnittet.
+Dette vil ligge til grund for beslutningerne i afgrænsnings afsnittet.
 
-Teknologianalysen vil komme mere specifikt ind på hvilke teknologier der er relevante i de forskellige dele af systemet, fx valg af programmeringssprog, frameworks, modeller til embedding og LLM modeller.
+Teknologianalysen vil komme mere specifikt ind på hvilke teknologier der er relevante i de forskellige dele af systemet, fx valg af programmeringssprog, frameworks, modeller til embedding og LLM.
 
 \section{Systemanalyse}
 
-Arkitekturen i systemet er basering på en microservice arkitektur, hvor flere services har hver deres ansvar. AI søgnings projektet vil indgå i denne arkitektur som en selvstændig service.
+Arkitekturen i systemet er basering på en microservice arkitektur, hvor flere services har hver deres ansvar. 
+AI søgnings projektet vil indgå i denne arkitektur som en selvstændig service.
+Herunder ses en liste over de allerede eksisterende dele af systemet, der vil blive påvirket af udviklingen af AI søgnings projektet:
+
+\begin{itemize}
+    \item \textbf{AI Microservice:} Denne service er central for projektet. Her vil embeddings blive genereret og gemt i databasen, og der vil ligeledes blive genereret et opsummerende svar på baggrund af contexten i en forespørgsel.
+    \item \textbf{Umbraco Backend:} Backenden spiller en central rolle for i den endelige integration af AI søgningen, og har en række ansvarsområder:
+        \begin{itemize}
+            \item{At sende nyt og opdateret indhold fra Umbraco til AI microservicen, så der kan genereres embeddings.}
+            \item{At videreformidle forespørgsler fra frontend til AI microservicen, og returnere søgeresultater samt det opsummerende svar.}
+        \end{itemize}
+    \item \textbf{Frontend:} Frontenden har det naturlige ansvar for at præsentere AI søgningen for brugeren, og skal derfor kunne håndtere brugerinput og vise søgeresultater samt det opsummerende svar på en brugervenlig måde.
+\end{itemize}
 
 
