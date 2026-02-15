@@ -49,9 +49,47 @@ Frontenden kan ikke ses som kritisk for udviklingen af AI søgningen, men er sel
 
 \section{Teknologianalyse}
 
+Herunder gennemgås nogle udvalgte teknologiområder, der er relevante for udviklingen af projektet. På baggrund af denne analyse, vil der blive truffet valg om hvilke teknologier der anvendes i projektet.
+
 \subsection{Programmeringssprog}
 
-\subsection{Frameworks}
+Valget af programmeringssprog baserer sig på flere forskellige faktorer, herunder hvilket sprog der har det bedste økosystem for de opgaver der skal løses, og hvilket sprog der er mest udbredt i det miljø som projektet skal integreres i. Derudover er performance også en faktor, og teamet som skal udvikle og maintaine systemet kan også have præferencer og kompetencer, der er værd at tage i betragtning.
+
+\subsubsection{C\#/.NET}
+
+C\# og .NET er det klart mest brugte sprog hos Heyday, og Umbraco CMS systemet er også udviklet i C\#, ovenpå ASP.NET. Derfor ville valget af C\# understøtte en nemmere potentielt nemmere integration med Umbraco, og det kunne endda overvejes at udvikle AI microservicen som en del af et større backend monorepo, hvor AI søgningen er en del af backenden.
+
+Ulempen ved C\# er, at det ikke er det mest udbredte sprog i AI miljøet, og derfor kan det være sværere at finde færdige løsninger og biblioteker til de opgaver der skal løses. Ollama (beskrevet senere i Frameworks afsnittet), har dog en fin integration med C\#, men hvis der senere skal udvides med mere avancerede eller custom AI løsninger, kan C\# økosystemet have sine begrænsninger \cite{csharpvspython}.
+
+\subsubsection{Python}
+
+Python er det mest udbredte sprog i AI miljøet, og har et enormt økosystem af biblioteker og frameworks til AI udvikling, herunder NumPy, Pandas, TensorFlow, Scikit Learn og mange flere. Det er derfor det oplagte valg for udviklingen af AI microservicen, da det vil gøre det nemmere at finde færdige løsninger og biblioteker til de opgaver der skal løses, og det vil også gøre det nemmere at udvide med mere avancerede eller custom AI løsninger i fremtiden.
+
+Heyday's udviklingsteam har dog ikke meget erfaring med Python, og det kan derfor være en udfordring at maintaine og viderudvikle systemet i fremtiden. Dog gør Pythons popularitet og nemme syntax det relativt nemt for udviklere at lære, og der er mange ressourcer tilgængelige for at lære Python.
+
+Performance er også en faktor, og sammenlifnet med C\# kan Python være langsommere, alene fordi C\# er et compiled sprog og Python er interpreted.
+
+Det vurderes dog at fordelene ved Python i form af det store økosystem og nemme adgang til AI biblioteker, opvejer ulemperne. Derfor vil AI Microservicen blive udviklet i Python. Hermed vil der også være vished for, at alle AI udfordringer det opstår i processen kan løses, med et at de mange AI biblioteker der findes i Python.
+
+\subsection{AI Frameworks}
+
+Til at køre AI modeller lokalt, findes der en række forskellige frameworks, der hver især har fordele og ulemper. Valget af framework afhænger af flere faktorer, men især performance, tilgængelige modeller og ease-of-use er vigtige faktorer at tage i betragtning.
+
+\subsubsection{Ollama}
+
+Ollama er et af de mest populære frameworks til at kære LLM modeller lokalt\cite{ollama}. Det har flere klare fordele:
+
+\begin{itemize}
+    \item Det er nemt at komme i gang med, har både en UI og en CLI, samt et bibliotek og API til Python.
+    \item Mange modeller, der er i et stort online bibliotek \cite{ollama}.
+\end{itemize}
+
+Der er ligeledes udviklet et dedikeret Docker image til Ollama, og det tager praktisk taget få minutter at starte en Ollama server op lokalt, og downloade de ønskede modeller.
+Der hvor Ollama kan komme til kort, er ift. performance. Her er det andre frameworks der gør det bedre.
+
+\subsubsection{vLLM}
+
+vLLM er et framework udviklet med fokus på performance, og på at udnytte GPU'er optimalt\cite{vLLM}. Sammenlignet med Ollama, har det klare performance fordele \cite{ollamaVsVLLM}. Det er derfor et oplagt valg, hvis performance er en vigtig faktor, og det kan være det bedste valg for at køre LLM modeller i produktion. Ulempen er, at setup og brug er mere komplekst en Ollama, især når systemet der skal køre det ikke har en dedikeret NVIDIA GPU, og det er derfor ikke det bedste valg for udvikling og test.
 
 \subsection{Modeller til embedding}
 
