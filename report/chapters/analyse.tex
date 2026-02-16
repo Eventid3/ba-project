@@ -1,11 +1,52 @@
 \chapter{Analyse}
 \label{chap:analyse}
 
-I dette kapitel vil systemanalyse og teknologianalyse blive gennemgået. 
+I dette kapitel vil kvalitetsanalyse, systemanalyse og teknologianalyse blive gennemgået. 
+
+Idéen med kvalitetsanalysen er at definere nogle målbare forhold for essensen af problemformuleringen, så det bliver muligt at evaluere på resultaterne i projektet.
+
 Formålet med systemanalysen er, at belyse hvilke dele af systemet der er mest kritiske for udviklingen af projektet, og hvilken dele der kan ned prioriteres. 
 Dette vil ligge til grund for beslutningerne i afgrænsnings afsnittet.
 
 Teknologianalysen vil komme mere specifikt ind på hvilke teknologier der er relevante i de forskellige dele af systemet, fx valg af programmeringssprog, frameworks, modeller til embedding og LLM.
+
+\section{Kvalitetsanalyse}
+
+Problemformuleringen indeholder flere begreber, der kan være problematiske at evaluere på, da de potentielt kan tolkes på mange forskellige måder, og derfor være meget subjektive.
+For at gøre begreberne mere konkrete og målbare, er begreberne herunder diskuteret, og der bliver opsat en plan for hvordan de kan evalueres.
+
+\subsubsection{Relevans}
+
+Relevans defineres som systemets evne til at returnere dokumenter, der indholdsmæssigt besvarer brugerens forespørgsel. I søgningssammenhængen vurderes dette ud fra et sammenligningsgrundlag.
+Umbraco har allerede en eksisterende søgefunktion, der er baseret på traditionel nøgleordsbaseret søgning, og derfor kan det være relevant at sammenligne relevansen af AI søgningen med denne eksisterende søgefunktion.
+Til målbar test kan der opstilles et \textit{Golden Dataset}, hvor der defineres en række testspørgsmål (5-10 stk), hvortil der på forhånd er defineret en række dokumenter, der bør ligge i toppen af søgeresultaterne.
+
+Som evalueringsmetrik anvendes \textbf{Precision@K} (f.eks. K=3 eller K=5), som angiver andelen af relevante dokumenter blandt de øverste $K$ resultater. Dette muliggør en direkte sammenligning mellem den eksisterende nøgleordsbaserede søgning og den nye semantiske søgning.
+
+\subsubsection{Brugeroplevelse}
+
+Brugeroplevelse kan også ses som et blødt begreb, men i denne sammenhæng kan det, at der i det hele taget findes et opsummerende svar, betyde en forbedring af brugeroplevelsen.
+Hvis det derfor lykkedes at implementere denne feature i systemet, kan det anskues som en målbar forbedring af brugeroplevelsen, forudsat at svaret har en tilstrækkelig høj kvalitet (jf. nedenstående afsnit).
+
+Performance har også indvirkning på brugeroplevelsen. Semantisk søgning og tekstgenerering er beregningstungt, og svartider er kritisk. En "god brugeroplevelse" kan gøres målbar gennem responstider:
+
+\begin{itemize}
+    \item \textbf{Søgeresultater (Semantic Search):} Skal vises inden for ca. 500ms for at føles øjeblikkeligt.
+    \item \textbf{Genereret svar (LLM):} Må gerne tage længere tid (5-15 sekunder), forudsat at brugeren præsenteres for søgeresultaterne med det samme, og eventuelt suppleret af, at svaret streames.
+\end{itemize}
+
+\subsubsection{Kvalitet}
+
+Kvalitet er et bredt begreb, der kan dække over mange forskellige aspekter af projektet. I den generative del af svaret, kan kvaliteten sikres igennem den context LLM'en præsenteres for. 
+Derfor kan vi beskrive kvaliteten ud fra nogle parametre:
+
+\begin{itemize}
+    \item \textbf{Troværdighed:} Det genererede svar er baseret på de fundne dokumenter, og kun de fundne dokumenter. Det er ligeledes fri for hallucinationer.
+    \item \textbf{Kildehenvisninger:} Det genererede svar indeholder kildehenvisninger til de dokumenter, der er brugt som context for svaret. Dette kan både være i form af en liste over dokumenter, eller direkte henvisninger i teksten.
+    \item \textbf{Personalisering:} Søgeresultaterne og det genererede svar har forståelse for den brugertype der laver forespørgslen.
+    \item \textbf{Sprog:} Det genererede svar er på dansk, og har et letforståeligt og naturligt sprog, der er tilpasset målgruppen.
+\end{itemize}
+
 
 \section{Systemanalyse}
 
@@ -21,7 +62,7 @@ Denne service er central for projektet. Her vil embeddings blive genereret og ge
 Embeddings vil blive genereret i flere forskellige situationer:
 \begin{enumerate}
     \item{Når nyt indhold oprettes i Umbraco, eller eksisterende indhold opdateres.}
-    \item{Når en bruger foretager en søgning, og der skal genereres en embedding for forespørgslen. Det er denne embedding der skal sammenlignes med de dokument-embeddings der er gemt i databasen, for at finde de mest relevante resultater.}
+    \item{Når en bruger foretager en søgning, og der skal genereres en embedding for forespørgslen. Det er denne søgnings-embedding der skal sammenlignes med de dokument-embeddings der er gemt i databasen, for at finde de mest relevante resultater.}
 \end{enumerate}
 
 Herefter er det også denne service der har ansvaret for, at konstruere det opsummerende svar, baseret på de fundne dokumenter, og returnere dette til Umbraco backend.
